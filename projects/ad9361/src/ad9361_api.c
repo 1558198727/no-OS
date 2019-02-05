@@ -553,7 +553,7 @@ int32_t ad9361_init (struct ad9361_rf_phy **ad9361_phy,
 
 #ifndef AXI_ADC_NOT_PRESENT
 	/* platform specific wrapper to call ad9361_post_setup() */
-	ret = axi_adc_post_setup(phy);
+	ret = ad9361_post_setup(phy);
 	if (ret < 0)
 		goto out;
 #endif
@@ -1963,7 +1963,7 @@ int32_t ad9361_set_no_ch_mode(struct ad9361_rf_phy *phy, uint8_t no_ch_mode)
 	ad9361_setup(phy);
 #ifndef AXI_ADC_NOT_PRESENT
 	/* platform specific wrapper to call ad9361_post_setup() */
-	axi_adc_post_setup(phy);
+	ad9361_post_setup(phy);
 #endif
 
 	return 0;

@@ -154,7 +154,7 @@ static int32_t ad9361_iodelay_set(struct axiadc_state *st, unsigned lane,
 		else
 			return -ENODEV;
 	} else {
-		axi_adc_idelay_set(st, lane, val);
+		axi_adc_idelay_set(st->phy->rx_adc, lane, val);
 	}
 
 	return 0;
@@ -458,7 +458,7 @@ static int32_t ad9361_dig_tune_tx(struct ad9361_rf_phy *phy, uint32_t max_freq,
 		axi_adc_write(rx_adc, ADI_REG_CHAN_CNTRL(chan),
 			      ADI_FORMAT_SIGNEXT | ADI_FORMAT_ENABLE |
 			      ADI_ENABLE | ADI_IQCOR_ENB);
-		axi_adc_set_pnsel(phy->adc_state, chan, ADC_PN_CUSTOM);
+		axi_adc_set_pnsel(phy->rx_adc, chan, ADC_PN_CUSTOM);
 		axi_adc_read(rx_adc, 0x4414 + (chan) * 0x40, &saved_chan_ctrl6[chan]);
 		if (PCORE_VERSION_MAJOR(hdl_dac_version) > 7) {
 			axi_adc_read(rx_adc, 0x4418 + (chan) * 0x40, &saved_dsel[chan]);
@@ -487,7 +487,7 @@ static int32_t ad9361_dig_tune_tx(struct ad9361_rf_phy *phy, uint32_t max_freq,
 	for (chan = 0; chan < num_chan; chan++) {
 		axi_adc_write(rx_adc, ADI_REG_CHAN_CNTRL(chan),
 			      saved_chan_ctrl0[chan]);
-		axi_adc_set_pnsel(phy->adc_state, chan, ADC_PN9);
+		axi_adc_set_pnsel(phy->rx_adc, chan, ADC_PN9);
 		if (PCORE_VERSION_MAJOR(hdl_dac_version) > 7) {
 			axi_adc_write(rx_adc, 0x4418 + chan * 0x40,
 				      saved_dsel[chan]);

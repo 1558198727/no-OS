@@ -43,19 +43,6 @@
 /***************************** Include Files **********************************/
 /******************************************************************************/
 #include <stdint.h>
-#include "ad9361.h"
-
-
-/******************************************************************************/
-/********************** Macros and Constants Definitions **********************/
-/******************************************************************************/
-/* ADC COMMON */
-
-#define ADC_REG_CHAN_CNTRL_2(c)		(0x0414 + (c) * 0x40)
-#define ADC_IQCOR_COEFF_1(x)		(((x) & 0xFFFF) << 16)
-#define ADC_TO_IQCOR_COEFF_1(x)		(((x) >> 16) & 0xFFFF)
-#define ADC_IQCOR_COEFF_2(x)		(((x) & 0xFFFF) << 0)
-#define ADC_TO_IQCOR_COEFF_2(x)		(((x) >> 0) & 0xFFFF)
 
 /******************************************************************************/
 /*************************** Types Declarations *******************************/
@@ -106,24 +93,23 @@ int32_t axi_adc_read(struct axi_adc *adc,
 int32_t axi_adc_write(struct axi_adc *adc,
 		      uint32_t reg_addr,
 		      uint32_t reg_data);
-int axi_adc_post_setup(struct ad9361_rf_phy *phy);
-int axi_adc_set_pnsel(struct axiadc_state *st, int channel,
+int axi_adc_set_pnsel(struct axi_adc *adc, int channel,
 		      enum adc_pn_sel sel);
-void axi_adc_idelay_set(struct axiadc_state *st,
+void axi_adc_idelay_set(struct axi_adc *adc,
 			unsigned lane, unsigned val);
-int32_t adc_get_calib_scale(struct ad9361_rf_phy *phy,
+int32_t adc_get_calib_scale(struct axi_adc *adc,
 			    uint32_t chan,
 			    int32_t *val,
 			    int32_t *val2);
-int32_t adc_get_calib_scale(struct ad9361_rf_phy *phy,
+int32_t adc_get_calib_scale(struct axi_adc *adc,
 			    uint32_t chan,
 			    int32_t *val,
 			    int32_t *val2);
-int32_t adc_set_calib_phase(struct ad9361_rf_phy *phy,
+int32_t adc_set_calib_phase(struct axi_adc *adc,
 			    uint32_t chan,
 			    int32_t val,
 			    int32_t val2);
-int32_t adc_set_calib_scale(struct ad9361_rf_phy *phy,
+int32_t adc_set_calib_scale(struct axi_adc *adc,
 			    uint32_t chan,
 			    int32_t val,
 			    int32_t val2);

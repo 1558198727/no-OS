@@ -35,6 +35,9 @@
 #ifdef UART_INTERFACE
 #include "serial.h"
 #endif // UART_INTERFACE
+#ifdef TCPIP_INTERFACE
+#include "network.h"
+#endif // TCPIP_INTERFACE
 #include "xil_cache.h"
 #include "platform_drivers.h"
 static uint32_t request_mask;
@@ -1460,7 +1463,8 @@ ssize_t get_cf_calibscale(char *buf, size_t len,
 			  const struct channel_info *channel)
 {
 	int32_t val, val2;
-	ssize_t ret = adc_get_calib_scale(ad9361_phy, channel->ch_num, &val, &val2);
+	ssize_t ret = adc_get_calib_scale(ad9361_phy->rx_adc, channel->ch_num, &val,
+					  &val2);
 	int i = 0;
 	if(ret < 0)
 		return ret;
@@ -2333,7 +2337,7 @@ ssize_t set_cf_calibphase(char *buf, size_t len,
 	float calib = strtof(buf, NULL);
 	int32_t val = (int32_t)calib;
 	int32_t val2 = (int32_t)(calib* 1000000) % 1000000;
-	adc_set_calib_phase(ad9361_phy, channel->ch_num, val, val2);
+	adc_set_calib_phase(ad9361_phy->rx_adc, channel->ch_num, val, val2);
 	return len;
 }
 
@@ -2370,7 +2374,7 @@ ssize_t set_cf_calibscale(char *buf, size_t len,
 	float calib= strtof(buf, NULL);
 	int32_t val = (int32_t)calib;
 	int32_t val2 = (int32_t)(calib* 1000000) % 1000000;
-	adc_set_calib_scale(ad9361_phy, channel->ch_num, val, val2);
+	adc_set_calib_scale(ad9361_phy->rx_adc, channel->ch_num, val, val2);
 	return len;
 }
 
@@ -2617,6 +2621,14 @@ const struct tinyiiod_ops ops = {
 	.write = serial_write_data,
 #endif // UART_INTERFACE
 
+#ifdef TCPIP_INTERFACE
+	.read = tcpip_read,
+	.read_line = tcpip_read_line,
+	.read_nonbloking = tcpip_read_nonblocking,
+	.read_wait = tcpip_read_wait,
+	.write = tcpip_write_data,
+	.exit = tcpip_exit,
+#endif // TCPIP_INTERFACE
 	//device operations
 	.read_attr = read_attr,
 	.write_attr = write_attr,
