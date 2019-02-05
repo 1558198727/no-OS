@@ -66,6 +66,10 @@
 #define AD9361_TX_1_BASEADDR		XPAR_AXI_AD9361_BASEADDR + 0x4000
 #endif
 #endif
+
+#define RX_CORE_BASEADDR AD9361_RX_0_BASEADDR
+#define TX_CORE_BASEADDR AD9361_TX_0_BASEADDR
+
 #ifdef XPAR_AXI_DMAC_0_BASEADDR
 #define CF_AD9361_RX_DMA_BASEADDR	XPAR_AXI_DMAC_0_BASEADDR
 #else
@@ -122,5 +126,7 @@
 #define SPI_DEVICE_ID				XPAR_SPI_0_DEVICE_ID
 #endif
 #endif
+
+#define CLK_CS			0x0f // todo it works but is it ok?
 
 #endif // __PARAMETERS_H__
