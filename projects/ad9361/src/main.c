@@ -42,7 +42,8 @@
 /******************************************************************************/
 #include "config.h"
 #include "ad9361_api.h"
-#include "parameters.h"
+#include "ad9361_parameters.h"
+#include "platform_drivers.h"
 #ifdef CONSOLE_COMMANDS
 #include "command.h"
 #include "console.h"
