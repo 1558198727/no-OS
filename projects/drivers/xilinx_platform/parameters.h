@@ -1,9 +1,9 @@
 /***************************************************************************//**
- *   @file   parameters.h
- *   @brief  Parameters Definitions.
+ *   @file   parameters.c
+ *   @brief  Platform dependent parameters.
  *   @author DBogdan (dragos.bogdan@analog.com)
 ********************************************************************************
- * Copyright 2013(c) Analog Devices, Inc.
+ * Copyright 2018(c) Analog Devices, Inc.
  *
  * All rights reserved.
  *
@@ -36,26 +36,19 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
-#ifndef __PARAMETERS_H__
-#define __PARAMETERS_H__
+#ifndef _PARAMETERS_H_
+#define _PARAMETERS_H_
+
+/******************************************************************************/
+/***************************** Include Files **********************************/
+/******************************************************************************/
+#include "platform_drivers.h"
 
 /******************************************************************************/
 /********************** Macros and Constants Definitions **********************/
 /******************************************************************************/
-#define CF_AD9361_RX_BASEADDR		0xFF320000
-#define CF_AD9361_TX_BASEADDR		0xFF320000 + 0x4000
 
-#define CF_AD9361_RX_DMA_BASEADDR	0xFF300000
-#define CF_AD9361_TX_DMA_BASEADDR	0xFF304000
-
-#define ADC_DDR_BASEADDR			0x20000000
-#define DAC_DDR_BASEADDR			0x30000000
-
-#define SPI_BASEADDR				0xFF308000
-#define GPIO_BASEADDR				0xFF309000
-
-#define GPIO_DEVICE_ID				0
-#define GPIO_RESET_PIN				4
-#define SPI_DEVICE_ID				0
-
-#endif // __PARAMETERS_H__
+#include "ad9361_parameters.h"
+#define RX_CORE_BASEADDR AD9361_RX_0_BASEADDR
+#define TX_CORE_BASEADDR AD9361_TX_0_BASEADDR
+#endif
