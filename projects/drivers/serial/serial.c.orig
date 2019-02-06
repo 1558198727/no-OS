@@ -82,12 +82,12 @@
 /************************** Function Prototypes *****************************/
 
 int32_t UartPsIntrExample(INTC *IntcInstPtr, XUartPs *UartInstPtr,
-			  u16 DeviceId, u16 UartIntrId);
+		      u16 DeviceId, u16 UartIntrId);
 
 
 static int32_t SetupInterruptSystem(INTC *IntcInstancePtr,
-				    XUartPs *UartInstancePtr,
-				    u16 UartIntrId);
+				XUartPs *UartInstancePtr,
+				u16 UartIntrId);
 
 void Handler(void *CallBackRef, u32 Event, uint32_t EventData);
 
@@ -204,7 +204,7 @@ int32_t init_uart(void)
 
 
 int32_t UartPsIntrExample(INTC *IntcInstPtr, XUartPs *UartInstPtr,
-			  u16 DeviceId, u16 UartIntrId)
+		      u16 DeviceId, u16 UartIntrId)
 {
 	int32_t Status;
 	XUartPs_Config *Config;
@@ -375,8 +375,8 @@ void Handler(void *CallBackRef, u32 Event, uint32_t EventData)
 *
 ****************************************************************************/
 static int32_t SetupInterruptSystem(INTC *IntcInstancePtr,
-				    XUartPs *UartInstancePtr,
-				    u16 UartIntrId)
+				XUartPs *UartInstancePtr,
+				u16 UartIntrId)
 {
 	int32_t Status;
 

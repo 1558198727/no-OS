@@ -186,7 +186,7 @@ int32_t tinyiiod_do_exit(struct tinyiiod *iiod)
 }
 
 int32_t tinyiiod_do_writebuf(struct tinyiiod *iiod,
-			     const char *device, size_t bytes_count)
+			 const char *device, size_t bytes_count)
 {
 	char *pbuffer = (char*)malloc(bytes_count);
 	if(pbuffer == NULL) {
